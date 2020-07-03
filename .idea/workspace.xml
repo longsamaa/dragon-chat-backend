@@ -1,13 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:backend-dragon-chat" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:heroku" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="9be88a53-c6e2-48d2-972a-ab4a4458a645" name="Default Changelist" comment="" />
+    <list default="true" id="9be88a53-c6e2-48d2-972a-ab4a4458a645" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/api/user/googleDataSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/user/controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/user/controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/user/model.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/user/model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/user/userSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/user/userSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/validation/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/validation/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1e9wyQOJaR4JXo6V9ctSF19bvW8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -46,28 +80,41 @@
       <option name="presentableId" value="Default" />
       <updated>1593747370788</updated>
       <workItem from="1593747373124" duration="21000" />
+      <workItem from="1593748713289" duration="298000" />
+      <workItem from="1593768015702" duration="11019000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1593747393522">
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1593780826347">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1593747393522" />
-    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1593747393522">
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1593780826347" />
+    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1593780826347">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1593747393522" />
-    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1593747393522">
+    <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1593780826347" />
+    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1593780826347">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1593747393522" />
-    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1593747393522">
+    <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1593780826347" />
+    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1593780826347">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1593747393522" />
+    <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1593780826347" />
   </component>
 </project>

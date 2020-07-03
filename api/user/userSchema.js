@@ -9,7 +9,8 @@ const userSchema = mongoose.Schema({
     email : {
         type : String,
         required: true,
-        trim : true
+        trim : true,
+        unique : true
     },
     password : {
         type : String,
@@ -27,8 +28,17 @@ const userSchema = mongoose.Schema({
         type : String,
         required : false
     },
-    googleId : {
+    External_Type : {
         type : String,
+        required : true
+    },
+    Create_at : {
+        type : Date,
+        required : true
+    },
+    googleData : {
+        type : mongoose.Schema.Types.ObjectID,
+        ref : 'googleData',
         required : false
     }
 });

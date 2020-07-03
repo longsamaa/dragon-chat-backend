@@ -3,26 +3,28 @@ const model = require('./model');
 const bcrypt = require('../../services/bcrypt');
 module.exports.registration = async (req , res, next) => {
     const user = req.body.user;
-    console.log(user);
-    const checkEmailExists = await validation.validationRegistrationCheckExists(user);
+    const checkEmailExists = await validation.checkEmailExists(user.email);
+    console.log(checkEmailExists);
     if(validation.validationRegistration(user)){
-        if(checkEmailExists.error) {
+        if(checkEmailExists) {
             res.status(409).send("Email is exists");
-        }else{
-            const hashPassword = bcrypt.hashPassword(user.password);
-            const newUser = {
-                nickname: user.nickname,
-                email: user.email,
-                password: user.password,
-                hashPassword: hashPassword
+        }
+        else
+        {
+        const hashPassword = bcrypt.hashPassword(user.password);
+        const newUser = {
+            nickname: user.nickname,
+            email: user.email,
+            password: user.password,
+            hashPassword: hashPassword
+        }
+        await model.addUser(newUser).then(data => {
+            if(data) {
+                res.status(200).send('create account success');
             }
-            await model.addUser(newUser).then(data => {
-                if(data) {
-                    res.status(200).send('create account success');
-                }
-            })
-                .catch(err => res.status(507).send('Create failed'));
-            }
+        })
+            .catch(err => res.status(507).send('Create failed'));
+        }
     }else{
         res.status(400).send('bad request');
     }
@@ -49,28 +51,46 @@ module.exports.login = (req, res, next) => {
         res.status(400).json({error : 'Bad request'})
     }
 }
-module.exports.GoogleLogin = async (req, res, next) => {
+module.exports.GoogleLogin =  async (req, res, next) => {
     const user = req.body;
+    console.log(user);
     if(validation.validationLoginWithGoogle(user)) {
-       await model.findGoogleId(user.googleId)
-           .then(data => {
-               if(data){
-                   const User = {id : data._id, email: data.email}
-                   res.status(200).json({token : model.createJwtToken(User)});
-               }else{
-                   console.log('da tao');
-                   model.addUserLoginWithGoogle(user).then(data => {
-                   if (data) {
-                       const User = {id : data._id, email: data.email}
-                       res.status(200).json({token : model.createJwtToken((User))});
-                   } else {
-                       res.status(400).json({error: 'Bad request'});
-                   }
-               })
-               }
-           })
+        const emailExists = await validation.checkEmailExists(user.email);
+        if(emailExists) {
+            console.log(emailExists);
+            res.status(409).send('Email exists');
+        }else{
+            //create User
+            const newData = {
+                googleId: user.response.googleId,
+                access_Token : user.response.access_Token
+            }
+            await model.addDataGoogle(newData)
+                .then(async (data) => {
+                    console.log(data);
+                    const newUser = {
+                        nickname: user.response.nickname,
+                        email: user.email,
+                        imageURL : user.response.imageURL,
+                        googleData : data._id
+                    }
+                    await model.addUserGoogle(newUser)
+                            .then(data => {
+                                if(data){
+                                    console.log(newUser.googleData);
+                                    res.status(200).send('Tao thanh cong')
+                                }
+                            })
+                            .catch(async (err) => {
+                                await model.deleteDataGoogleError(newUser.googleData);
+                                res.status(507).send('Create failed')
+                            })
+                })
+                .catch(err => res.status(507).send('Create failed'))
+            //---
+        }
     }else{
-        res.status(400).json({error : 'Bad request'});
+        res.status(400).send('Bad request');
     }
 }
 module.exports.getProfile = (req, res, next) => {
