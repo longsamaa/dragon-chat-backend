@@ -2,6 +2,7 @@ const validation = require('../../validation');
 const model = require('./model');
 const bcrypt = require('../../services/bcrypt');
 const googleVerify = require('../../services/google-auth');
+const define = require('./define');
 module.exports.registration = async (req , res, next) => {
     const user = req.body.user;
     const checkEmailExists = await validation.checkEmailExists(user.email);
@@ -50,30 +51,55 @@ module.exports.GoogleLogin = async (req, res, next) => {
     googleVerify(token)
         .then(async (data) => {
             const emailExists = await validation.checkEmailExists(data.getPayload().email);
-            if(emailExists){
-                console.log(emailExists);
-                res.status(409).send('Email exists');
-            }else{
-                const payload = data.getPayload();
-                await model.addDataGoogle(payload)
-                    .then(async (result) => {
-                        const newUser = {
-                            nickname: payload.given_name,
-                            email : payload.email,
-                            imageURL : payload.picture,
-                            googleData : result._id
-                        };
-                        await model.addUserGoogle(newUser)
-                            .then(result => {
-                                res.status(200).send('Sign In success');
-                            })
-                            .catch(async (err) => {
-                                await model.deleteDataGoogleError(result._id);
-                                res.status(507).send('Create failed');
-                            })
-                    })
-                    .catch(err => res.status(507).send('Create failed'))
+            if(emailExists) {
+                if (emailExists.External_Type === define.EXTERNAL_TYPE_LOCAL) {
+                    return res.status(409).send('Existing email cannot log in with google account');
+                }
+                const user = {
+                    _id: emailExists._id,
+                    email: emailExists.email,
+                }
+                return res.status(200).json({
+                    message: 'Sign In succes',
+                    data: {
+                        id: emailExists._id,
+                        token: model.createJwtToken(user)
+                    }
+                });
             }
+            const payload = data.getPayload();
+            await model.addDataGoogle(payload)
+                .then(async (result) => {
+                    console.log(result);
+                    const newUser = {
+                        nickname: payload.given_name,
+                        email: payload.email,
+                        imageURL: payload.picture,
+                        googleData: result._id
+                    };
+                    await model.addUserGoogle(newUser)
+                        .then(result => {
+                            const user = {
+                                _id: result._id,
+                                email: result.email,
+                            }
+                            return res.status(200).json({
+                                    message: 'Sign In succes',
+                                    data: {
+                                        id: result._id,
+                                        token: model.createJwtToken(user)
+                                    }
+                            });
+                        })
+                        .catch(async (err) => {
+                            await model.deleteDataGoogleError(result._id);
+                            console.log(err);
+                            return res.status(507).send('Create failed');
+                        })
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(507).send('Create failed')})
         })
         .catch(err => {
         if(err){

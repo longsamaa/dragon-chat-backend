@@ -1,13 +1,14 @@
 const jwt = require('jsonwebtoken');
 const User = require('./userSchema');
 const googleData = require('./googleDataSchema');
+const define = require('./define');
 module.exports.addUser = async (user) => {
     const newUser = new User({
         nickname: user.nickname,
         email: user.email,
         password: user.password,
         hashPassword: user.hashPassword,
-        External_Type : 'Local',
+        External_Type : define.EXTERNAL_TYPE_LOCAL,
         Create_at : new Date().getTime()
     });
     return await newUser.save()
@@ -26,7 +27,7 @@ module.exports.addUserGoogle = async (user) => {
         email: user.email,
         imageURL : user.imageURL,
         googleData : user.googleData,
-        External_Type : 'Google',
+        External_Type : define.EXTERNAL_TYPE_GOOGLE,
         Create_at : new Date().getTime()
     });
     return await newUser.save()
