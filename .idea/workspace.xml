@@ -25,15 +25,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9be88a53-c6e2-48d2-972a-ab4a4458a645" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/services/google-auth/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/user/controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/user/controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/user/googleDataSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/user/googleDataSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/user/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/user/model.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/user/model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +79,7 @@
       <workItem from="1593748713289" duration="298000" />
       <workItem from="1593768015702" duration="11019000" />
       <workItem from="1593830792478" duration="7812000" />
+      <workItem from="1593840886978" duration="64000" />
     </task>
     <servers />
   </component>
@@ -105,21 +99,21 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1593840644065">
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1593840950214">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1593840644065" />
-    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1593840644065">
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1593840950214" />
+    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1593840950214">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1593840644065" />
-    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1593840644065">
+    <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1593840950214" />
+    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1593840950214">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1593840644065" />
-    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1593840644065">
+    <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1593840950214" />
+    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1593840950214">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1593840644065" />
+    <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1593840950214" />
   </component>
 </project>

@@ -59,7 +59,7 @@ module.exports.GoogleLogin = async (req, res, next) => {
                     .then(async (result) => {
                         const newUser = {
                             nickname: payload.given_name,
-                            email : 'ntlong281098@gmail.com',
+                            email : payload.email,
                             imageURL : payload.picture,
                             googleData : result._id
                         };
