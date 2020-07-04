@@ -1,6 +1,7 @@
 const validation = require('../../validation');
 const model = require('./model');
 const bcrypt = require('../../services/bcrypt');
+const googleVerify = require('../../services/google-auth');
 module.exports.registration = async (req , res, next) => {
     const user = req.body.user;
     const checkEmailExists = await validation.checkEmailExists(user.email);
@@ -29,13 +30,6 @@ module.exports.registration = async (req , res, next) => {
         res.status(400).send('bad request');
     }
 }
-
-module.exports.details = (req ,res , next) => {
-    //validation input
-    const id = req.params.id;
-    const user = model.details(id);
-    res.json(user);
-}
 module.exports.addUser = (req, res, next) => {
     //validation input
     const user = model.addUser(req.body);
@@ -51,48 +45,39 @@ module.exports.login = (req, res, next) => {
         res.status(400).json({error : 'Bad request'})
     }
 }
-module.exports.GoogleLogin =  async (req, res, next) => {
-    const user = req.body;
-    console.log(user);
-    if(validation.validationLoginWithGoogle(user)) {
-        const emailExists = await validation.checkEmailExists(user.email);
-        if(emailExists) {
-            console.log(emailExists);
-            res.status(409).send('Email exists');
-        }else{
-            //create User
-            const newData = {
-                googleId: user.response.googleId,
-                access_Token : user.response.access_Token
-            }
-            await model.addDataGoogle(newData)
-                .then(async (data) => {
-                    console.log(data);
-                    const newUser = {
-                        nickname: user.response.nickname,
-                        email: user.email,
-                        imageURL : user.response.imageURL,
-                        googleData : data._id
-                    }
-                    await model.addUserGoogle(newUser)
-                            .then(data => {
-                                if(data){
-                                    console.log(newUser.googleData);
-                                    res.status(200).send('Tao thanh cong')
-                                }
+module.exports.GoogleLogin = async (req, res, next) => {
+    const token = req.body.token;
+    googleVerify(token)
+        .then(async (data) => {
+            const emailExists = await validation.checkEmailExists(data.getPayload().email);
+            if(emailExists){
+                console.log(emailExists);
+                res.status(409).send('Email exists');
+            }else{
+                const payload = data.getPayload();
+                await model.addDataGoogle(payload)
+                    .then(async (result) => {
+                        const newUser = {
+                            nickname: payload.given_name,
+                            email : 'ntlong281098@gmail.com',
+                            imageURL : payload.picture,
+                            googleData : result._id
+                        };
+                        await model.addUserGoogle(newUser)
+                            .then(result => {
+                                res.status(200).send('Sign In success');
                             })
                             .catch(async (err) => {
-                                await model.deleteDataGoogleError(newUser.googleData);
-                                res.status(507).send('Create failed')
+                                await model.deleteDataGoogleError(result._id);
+                                res.status(507).send('Create failed');
                             })
-                })
-                .catch(err => res.status(507).send('Create failed'))
-            //---
+                    })
+                    .catch(err => res.status(507).send('Create failed'))
+            }
+        })
+        .catch(err => {
+        if(err){
+            res.status(401).send('Authorize');
         }
-    }else{
-        res.status(400).send('Bad request');
-    }
-}
-module.exports.getProfile = (req, res, next) => {
-    res.json(req.user);
+    });
 }

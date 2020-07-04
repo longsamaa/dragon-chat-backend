@@ -1,10 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('./userSchema');
 const googleData = require('./googleDataSchema');
-module.exports.details = (id) => {
-    const user = [{id : 1, name : 'x'}];
-    return user.find(u => u.id === parseInt(id));
-}
 module.exports.addUser = async (user) => {
     const newUser = new User({
         nickname: user.nickname,
@@ -43,13 +39,25 @@ module.exports.addUserGoogle = async (user) => {
         });
 }
 module.exports.deleteDataGoogleError = async (idData) => {
-    return await googleData.delete({_id : idData})
-        .catch(err => Promise.reject(err));
+   return await googleData.deleteOne({_id : idData},(err,result) => {
+       if(err) return err;
+       return result;
+   })
 }
 module.exports.addDataGoogle = async (data) =>{
     const newData = new googleData({
-        googleId : data.googleId,
-        access_Token : data.access_Token
+        iss : data.iss,
+        azp : data.azp,
+        aud : data.aud,
+        sub : data.sub,
+        email : data.email,
+        email_verified : data.email_verified,
+        name : data.name,
+        at_hash : data.at_hash,
+        picture : data.picture,
+        given_name : data.given_name,
+        family_name : data.family_name,
+        locale : data.local
     })
     return await newData.save()
         .then(result => {
