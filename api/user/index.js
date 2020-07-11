@@ -7,5 +7,6 @@ router.post('/',controller.addUser);
 router.post('/login',passport.authenticate('local', {session : false}),controller.login);
 router.post('/registration',controller.registration);
 router.post('/GoogleLogin',controller.GoogleLogin);
+router.get('/profile',passport.authenticate('jwt',{session : false}),controller.getProfile);
 
 module.exports = router;

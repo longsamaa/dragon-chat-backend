@@ -2,7 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../../api/user/userSchema');
 const bcrypt = require('../bcrypt');
-
+const define = require('../../api/user/define');
 module.exports = new LocalStrategy(({
         usernameField: 'email',
         passwordField: 'password',
@@ -16,10 +16,13 @@ module.exports = new LocalStrategy(({
             if(!user){
                 return done(null,false);
             }
+            if(user.External_Type == define.EXTERNAL_TYPE_GOOGLE){
+                return done(null,false);
+            }
             if(!bcrypt.checkPassword(password,user.hashPassword)){
                 return done(null,false);
             }
-            return done(null, {id : user._id,email : user.email});
+            return done(null, user);
         })
     }
 );
